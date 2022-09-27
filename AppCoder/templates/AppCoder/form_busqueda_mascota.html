@@ -1,0 +1,11 @@
+{% extends "AppCoder/plantilla_base.html" %}
+
+{% block contenido_base %}
+<form action="{% url 'busqueda_mascota' %}" method="GET">
+  {% csrf_token %}
+  <span>Edad:
+    <input type="integer" name="edad">
+  </span>
+  <input type="submit" value="Buscar" />
+</form>
+{% endblock contenido_base %}
