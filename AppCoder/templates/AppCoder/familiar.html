@@ -11,7 +11,7 @@
     padding:5px 10px;
   }
   .eliminado {
-    background-color: red;
+    background-color: greenyellow;
   }
 </style>
 {% endblock style_block %}
@@ -19,7 +19,7 @@
 {% block contenido_base %}
 
 {% if borrado %}
-{% comment %} <div class="eliminado">Fue borrado exitosamente el profesor de ID: {{ borrado }}</div> {% endcomment %}
+{% comment %} <div class="eliminado">El familiar fue borrado exitosamente de ID: {{ borrado }}</div> {% endcomment %}
 {% endif %}
 
 <h1>Familiares</h1>

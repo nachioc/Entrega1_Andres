@@ -5,13 +5,13 @@ from AppCoder import views
 urlpatterns = [
     path('', views.inicio, name="inicio"),
    
-    # URLs de Cursos
+    # URLs de Mascotas
     path('mascota/', views.mascota, name="mascota"),
     path('crear-mascota/', views.crear_mascota, name="crear_mascota"),
     path('busqueda-mascota-form/', views.busqueda_mascota, name="busqueda_mascota_form"),
     path('busqueda-mascota/', views.buscar_mascota, name="busqueda_mascota"),
     
-    # URLs de Profesores
+    # URLs de Profesiones
     path('profesion/', views.profesion, name="profesion"),
     path('crear-profesion/', views.crear_profesion, name="crear_profesion"),
     path('editar-profesion/<int:id>/', views.editar_profesion, name="editar_profesion"),
