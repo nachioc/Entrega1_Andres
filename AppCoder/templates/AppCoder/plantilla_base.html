@@ -27,22 +27,38 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'inicio' %}">INICIO</a>
-                <a class="navbar-brand" href="{% url 'familiar' %}">Familiares</a>
-                <a class="navbar-brand" href="{% url 'mascota' %}">Mascotas</a>
-                <a class="navbar-brand" href="{% url 'profesion' %}">Profesiones</a>
-                <a class="btn btn-primary" href="#signup">INICIAR</a>
+                <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+                <a class="navbar-brand" href="{% url 'blogs' %}">Blogs</a>
+                <a class="navbar-brand" href="{% url 'foro' %}">Foro</a>
+                <a class="navbar-brand" href="{% url 'acerca_de_mi' %}">Acerca de mi</a>
+                {% if user.is_authenticated %}
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{ user.username }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar mis datos</a></li>
+                        <li><a class="dropdown-item" href="{% url 'agregar_avatar' %}">Agregar Avatar</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}"><strong>Cerrar Sesión</strong></a></li>
+                    </ul>
+                </div>
+              {% else %}
+              <a class="btn btn-primary" href="{% url 'register' %}">registrate</a>
+              {% endif %}
             </div>
         </nav>
 
         <section style="padding:80px;">
+            {% if mensaje %}
+            <span style="background-color: blue;"> {{mensaje}} </span>
+            {% endif %}
             {% block contenido_base %}
             {% endblock contenido_base %}
         </section>
 
 
         <!-- Footer-->
-        <footer class="footer bg-light">
+        <footer class="footer bg-light" style="position: absolute; bottom: 0; width: 100%; height: 40px;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">

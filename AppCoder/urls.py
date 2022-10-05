@@ -6,19 +6,22 @@ urlpatterns = [
     path('', views.inicio, name="inicio"),
    
     # URLs de Mascotas
-    path('mascota/', views.mascota, name="mascota"),
-    path('crear-mascota/', views.crear_mascota, name="crear_mascota"),
-    path('busqueda-mascota-form/', views.busqueda_mascota, name="busqueda_mascota_form"),
-    path('busqueda-mascota/', views.buscar_mascota, name="busqueda_mascota"),
+    path('acerca_de_mi/', views.mascota, name="acerca_de_mi"),
     
     # URLs de Profesiones
-    path('profesion/', views.profesion, name="profesion"),
+    path('foro/', views.profesion, name="foro"),
     path('crear-profesion/', views.crear_profesion, name="crear_profesion"),
     path('editar-profesion/<int:id>/', views.editar_profesion, name="editar_profesion"),
     path('eliminar-profesion/<int:id>/', views.eliminar_profesion, name="eliminar_profesion"),
    
     # URLs de Familiares
-    path('familiar/', views.FamiliarListView.as_view(), name="familiar"),
-    path('crear-familiar/', views.FamiliarCreateView.as_view(), name="crear_familiar"),
-    path('editar-familiar/<int:pk>/', views.FamiliarUpdateView.as_view(), name="editar_familiar"),
+    path('blogs/', views.familiar, name="blogs"),
+    
+    #URLs de usuario
+    path('editar-perfil/', views.ProfileUpdateView.as_view(), name="editar_perfil"),
+     path('agregar-avatar/', views.agregar_avatar, name="agregar_avatar"),
+    #URLs de login
+    path('register', views.register, name = 'register'),
+    path('login/', views.login_request, name = 'login'),
+    path('logout/', views.CustomLogoutView.as_view(), name = 'logout'),
 ]

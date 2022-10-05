@@ -19,22 +19,18 @@
 {% block contenido_base %}
 
 {% if borrado %}
-<div class="eliminado">Fue borrada exitosamente la profesion de ID: {{ borrado }}</div>
+<div class="eliminado">Fue borrado exitosamente el comentario: {{ borrado }}</div>
 {% endif %}
 
-<h1>Profesiones</h1>
-<a href="{% url 'crear_profesion' %}">Crear profesion!</a>
+<h1>Comentarios</h1>
+<a href="{% url 'crear_profesion' %}">Crear comentario</a>
 
 <br><br>
 
 <table class="coder-table">
   <tbody>
     <tr>
-      <th>
-        <strong>Nombre</strong>
-      </th>
-      <th>Editar</th>
-      <th>Eliminar</th>
+      <td>{{ user.username }} a Comentado:</td>
     </tr>
     {% for profesion in profesion %}
     <tr>

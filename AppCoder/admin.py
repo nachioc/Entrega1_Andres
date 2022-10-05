@@ -1,6 +1,7 @@
 from django.contrib import admin
-from AppCoder.models import Familiar, Profesion, Mascota
+from AppCoder.models import Profesion, Avatar
 
-admin.site.register(Familiar)
+
+
 admin.site.register(Profesion)
-admin.site.register(Mascota)
+admin.site.register(Avatar)

@@ -3,9 +3,15 @@
 {% block contenido_base %}
 
 {% if exitoso %}
-<div style="background-color:#d83d8a;">Tu mascota fue guardada!!!!</div>
+<div style="background-color:#e0187c;">wenaaaaa salio bien</div>
 {% endif %}
 
 <h1>Inicio!</h1>
+
+    <div class="text-center">
+        <img height="40px" src="{{ user.avatar.imagen.url }}" />
+        <p>wena po {{user.username}}</p>
+    </div>
+    
 
 {% endblock contenido_base %}
