@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from AppCoder.models import Avatar
+from AppCoder.models import Avatar, Post
 
 class ProfesionFormulario(forms.Form):   
     nombre= forms.CharField(max_length=200)
@@ -34,3 +34,13 @@ class AvatarFormulario(forms.ModelForm):
     class Meta:
         model = Avatar
         fields = ['imagen']
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = '__all__'
+
+        widgets = {
+            'tags':forms.CheckboxSelectMultiple(),
+        }

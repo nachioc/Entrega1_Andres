@@ -14,8 +14,11 @@ urlpatterns = [
     path('editar-profesion/<int:id>/', views.editar_profesion, name="editar_profesion"),
     path('eliminar-profesion/<int:id>/', views.eliminar_profesion, name="eliminar_profesion"),
    
-    # URLs de Familiares
-    path('blogs/', views.familiar, name="blogs"),
+    # URLs de BLogs
+    path('index/', views.familiar, name="index"),
+    path ('',views.insertPost ,name='insertUrl'),
+    path('post/<str:pk>/', views.post, name="post"),
+    path ('edit/<str:pk>',views.editPost ,name='editUrl'),
     
     #URLs de usuario
     path('editar-perfil/', views.ProfileUpdateView.as_view(), name="editar_perfil"),

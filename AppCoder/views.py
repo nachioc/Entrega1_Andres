@@ -1,10 +1,9 @@
-from email.mime import image
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from AppCoder.models import Profesion
-from AppCoder.forms import ProfesionFormulario, UserRegisterForm, UserUpdateForm, AvatarFormulario
+from AppCoder.models import *
+from AppCoder.forms import ProfesionFormulario, UserRegisterForm, UserUpdateForm, AvatarFormulario, PostForm
 
 #importaciones para login
 from django.contrib.auth.forms import AuthenticationForm
@@ -84,7 +83,7 @@ def editar_profesion(request, id):
 # Vistas de Familiares
 
 def familiar(request):
-    return render(request, "AppCoder/blog.html")
+    return render(request, "AppCoder/index.html")
 
 #vista usuario
 
@@ -101,22 +100,32 @@ class ProfileUpdateView(UpdateView):
 #vista registro
 
 def agregar_avatar(request):
-    
-    if request.method == 'POST':
-
-        form = AvatarFormulario(request.POST, request.FILES)
-
-        if form.is_valid:
-            user = User.objects.get(username=request.user)
-            avatar = form.save()
-            avatar.user = user
+      if request.method == 'POST':
             
-            avatar.save()
-            
-            return redirect(reverse('inicio'))
+            miFormulario = AvatarFormulario(request.POST ,request.FILES)
 
-    form = AvatarFormulario()
-    return render(request, "AppCoder/form_avatar.html", {"form":form})
+
+            if miFormulario.is_valid:   
+
+
+                u = User.objects.get(username=request.user)
+                
+                avatar = Avatar(user=u, imagen=miFormulario.cleaned_data['imagen']) 
+      
+                avatar.save()
+
+                return render(request, "AppCoder/inicio.html")
+
+      else: 
+
+            miFormulario= AvatarFormulario()
+
+      return render(request, "AppCoder/form_avatar.html", {"miFormulario":miFormulario})
+
+
+def urlImagen():
+
+      return "/media/avatares/logo.jpg"
 
 def register(request):
 
@@ -166,3 +175,34 @@ class CustomLogoutView(LogoutView):
     next_page = reverse_lazy('inicio')
 
 
+
+# Vista BLog
+
+def insertPost(request):
+    posts = Post.objects.all()
+    posts = Post.objects.filter(state=True)
+
+    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        return redirect ('/')    
+    context = {'form':form,'posts':posts}
+    return render (request, 'index.html',context)
+
+def post(request, pk):
+	post = Post.objects.get(id=pk)
+	context = {'post':post}
+	return render(request, 'post.html', context)
+
+def editPost(request, pk):
+    post =  Post.objects.get(id=pk)
+    form = PostForm(instance=post)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+        return redirect ('/')    
+    context = {'form':form}
+    return render (request, 'index.html',context)
